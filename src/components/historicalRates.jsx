@@ -2,23 +2,29 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Heading from "./@ui/heading";
 import Wrapper from "./@ui/wrapper";
-import { useSymbols } from "../context/symbolsContext";
 import SelectCurrency from "./selectCurrency";
 import SelectDate from "./selectDate";
+import SymbolsDetails from "./symbolsDetails";
 
 const HistoricalRates = () => {
-  const { symbols } = useSymbols();
   const [historicalRates, setHistoricalRates] = useState({});
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState("2024-02-04");
   const [baseCurrency, setBaseCurrency] = useState("USD");
 
   useEffect(() => {
     const fetchHistoricalRates = async () => {
+      const API_KEY = import.meta.env.VITE_API_KEY;
+
       try {
         const response = await axios.get(
-          `https://api.forexrateapi.com/v1/${selectedDate}?base=${baseCurrency}`
+          `https://api.forexrateapi.com/v1/${selectedDate}?api_key=${API_KEY}&base=${baseCurrency}`
         );
-        setHistoricalRates(response.data.rates);
+
+        if (response.data.success) {
+          setHistoricalRates(response.data.rates);
+        } else {
+          setHistoricalRates({});
+        }
       } catch (error) {
         console.error("Error fetching historical rates:", error);
       }
@@ -56,11 +62,21 @@ const HistoricalRates = () => {
           onChange={handleSelectCurrency}
         />
 
-        <ul>
-          {/* {Object.entries(historicalRates).map(([currencyCode, rate]) => (
-            <li key={currencyCode}>{`${currencyCode}: ${rate}`}</li>
-          ))} */}
-        </ul>
+        {/* Historical Rates */}
+
+        {Object.entries(historicalRates).length > 0 ? (
+          <SymbolsDetails
+            h1={"Currency Name"}
+            h2={"Historical Rates"}
+            data={historicalRates}
+            className={"mt-6"}
+          />
+        ) : (
+          <p className="mt-6 text-center">
+            {" "}
+            No Result found based on user's query!{" "}
+          </p>
+        )}
       </Wrapper>
     </div>
   );

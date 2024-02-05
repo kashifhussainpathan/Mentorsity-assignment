@@ -6,18 +6,23 @@ import SelectDate from "./selectDate";
 import SelectCurrency from "./selectCurrency";
 
 const CurrencyChangeParameters = () => {
-  const [endDate, setEndDate] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("2024-02-04");
+  const [startDate, setStartDate] = useState("2024-02-03");
   const [baseCurrency, setBaseCurrency] = useState("USD");
   const [changeParameters, setChangeParameters] = useState({});
 
   useEffect(() => {
     const fetchChangeParameters = async () => {
+      const API_KEY = import.meta.env.VITE_API_KEY;
       try {
         const response = await axios.get(
-          `https://api.forexrateapi.com/v1/change?base=${baseCurrency}&start_date=${startDate}&end_date=${endDate}`
+          `https://api.forexrateapi.com/v1/change?api_key=${API_KEY}&base=${baseCurrency}&start_date=${startDate}&end_date=${endDate}`
         );
-        setChangeParameters(response.data.rates[baseCurrency]);
+        if (response.data.success) {
+          setChangeParameters(response.data.rates[baseCurrency]);
+        } else {
+          setChangeParameters({});
+        }
       } catch (error) {
         console.error("Error fetching currency change parameters:", error);
       }
@@ -64,6 +69,23 @@ const CurrencyChangeParameters = () => {
           className={"mb-0"}
         />
         {/* Display the currency change parameters */}
+        {Object.entries(changeParameters).length > 0 ? (
+          <div className="mt-4">
+            {Object.entries(changeParameters)?.map(([per, data]) => (
+              <div
+                className="grid grid-cols-2 border border-gray-700 py-2 px-10  gap-[300px]"
+                key={per}
+              >
+                <div>{per}</div>
+                <div>
+                  {data} {per === "change_pct" ? "%" : ""}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center mt-6">{`Change percentage for '${startDate}' to '${endDate}' not found!`}</p>
+        )}
       </Wrapper>
     </div>
   );

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSymbols } from "../context/symbolsContext";
 import Heading from "./@ui/heading";
 import Wrapper from "./@ui/wrapper";
+import SymbolsDetails from "./symbolsDetails";
 
 const Symbols = () => {
   const { symbols, handleSetSymbols } = useSymbols();
@@ -25,27 +26,11 @@ const Symbols = () => {
     // fetchSymbols();
   }, []);
 
-  console.log(Object.entries(symbols));
-
   return (
     <>
       <Heading>SUPPORTED CURRENCIES </Heading>
       <Wrapper>
-        <div className="text-left w-full h-[500px] overflow-y-scroll pr-4">
-          <div className="grid grid-cols-2 border py-2 px-10 font-semibold rounded-md gap-[300px]">
-            <div>Currency Code</div>
-            <div>Currency Name</div>
-          </div>
-          {Object.entries(symbols).map(([currencyCode, currencyName]) => (
-            <div
-              className="grid grid-cols-2 border border-gray-700 py-2 px-10  gap-[300px]"
-              key={currencyCode}
-            >
-              <div>{currencyCode}</div>
-              <div>{currencyName}</div>
-            </div>
-          ))}
-        </div>
+        <SymbolsDetails h1="Currency Code" h2="Currency Name" data={symbols} />
       </Wrapper>
     </>
   );

@@ -2,20 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Heading from "./@ui/heading";
 import Wrapper from "./@ui/wrapper";
-import { useSymbols } from "../context/symbolsContext";
 import SelectCurrency from "./selectCurrency";
+import SymbolsDetails from "./symbolsDetails";
 
 const RealTimeExchangeRates = () => {
-  const { symbols } = useSymbols();
-
-  const [exchangeRates, setExchangeRates] = useState({});
+  const [exchangeRates, setExchangeRates] = useState(
+    JSON.parse(localStorage.getItem("realTimeExchange"))
+  );
   const [baseCurrency, setBaseCurrency] = useState("USD");
 
   useEffect(() => {
     const fetchExchangeRates = async () => {
+      const API_KEY = import.meta.env.VITE_API_KEY;
+
       try {
         const response = await axios.get(
-          `https://api.forexrateapi.com/v1/latest?base=${baseCurrency}`
+          `https://api.forexrateapi.com/v1/latest?api_key=${API_KEY}&base=${baseCurrency}`
+        );
+        localStorage.setItem(
+          "realTimeExchange",
+          JSON.stringify(response.data.rates)
         );
         setExchangeRates(response.data.rates);
       } catch (error) {
@@ -37,15 +43,17 @@ const RealTimeExchangeRates = () => {
       <Wrapper>
         <SelectCurrency
           baseCurrency={baseCurrency}
-          label={" Select Base Currency:"}
+          label={"Select Base Currency:"}
           onChange={handleSelectCurrency}
         />
+
         {/* Live Rates */}
-        <ul>
-          {/* {.map(([currencyCode, rate]) => (
-            <li key={currencyCode}>{`${currencyCode}: ${rate}`}</li>
-          ))} */}
-        </ul>
+        <SymbolsDetails
+          h1={"Currency Name"}
+          h2={"Currency Rate"}
+          data={exchangeRates}
+          className={"mt-6"}
+        />
       </Wrapper>
     </div>
   );

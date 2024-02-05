@@ -12,17 +12,21 @@ const CurrencyConversion = () => {
 
   useEffect(() => {
     const convertCurrency = async () => {
+      const API_KEY = import.meta.env.VITE_API_KEY;
+
       try {
         const response = await axios.get(
-          `https://api.forexrateapi.com/v1/convert?from=${fromCurrency}&to=${toCurrency}&amount=${amount}`
+          `https://api.forexrateapi.com/v1/convert?api_key=${API_KEY}&from=${fromCurrency}&to=${toCurrency}&amount=${amount}`
         );
-        setConvertedAmount(response.data.result);
+        if (response.data.success) {
+          setConvertedAmount(response.data.result);
+        }
       } catch (error) {
         console.error("Error converting currency:", error);
       }
     };
 
-    // convertCurrency();
+    convertCurrency();
   }, [fromCurrency, toCurrency, amount]);
 
   const handleChangeFromCurrency = (e) => {
@@ -40,7 +44,7 @@ const CurrencyConversion = () => {
         {/* From Currency */}
         <SelectCurrency
           label={"From Currency:"}
-          SelectCurrency={fromCurrency}
+          baseCurrency={fromCurrency}
           onChange={handleChangeFromCurrency}
           className={"mb-4"}
         />
@@ -48,7 +52,7 @@ const CurrencyConversion = () => {
         {/* To Curency */}
         <SelectCurrency
           label={"To Currency:"}
-          SelectCurrency={toCurrency}
+          baseCurrency={toCurrency}
           onChange={handleChangeToCurrency}
           className={"mb-4"}
         />
@@ -65,8 +69,19 @@ const CurrencyConversion = () => {
           />
         </div>
 
-        {convertedAmount !== null && (
-          <p className="text-center mt-6 text-2xl">{`Converted Amount: ${convertedAmount}`}</p>
+        {/* Conversion Details */}
+        {convertedAmount && (
+          <div className={`text-left w-full  overflow-y-scroll pr-4 mt-6`}>
+            <div className="grid grid-cols-2 border py-2 px-10 font-semibold rounded-md gap-[300px]">
+              <div>From {fromCurrency}</div>
+              <div>To {toCurrency}</div>
+            </div>
+
+            <div className="grid grid-cols-2 border border-gray-700 py-2 px-10  gap-[300px]">
+              <div>{amount}</div>
+              <div>{convertedAmount}</div>
+            </div>
+          </div>
         )}
       </Wrapper>
     </div>
