@@ -72,7 +72,7 @@ const ExchangeRatesOverTime = () => {
         {Object.entries(exchangeRatesOverTime).length > 0 ? (
           <div className="mt-4">
             {Object.entries(exchangeRatesOverTime)?.map(([date, data]) => (
-              <div key={date}>
+              <div key={date} className="mt-2">
                 <h3 className="font-semibold text-lg">{date} :-</h3>
                 <div>
                   <SymbolsDetails
