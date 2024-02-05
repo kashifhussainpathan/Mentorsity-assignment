@@ -11,13 +11,6 @@ This project is a Currency Exchange App that provides users with information rel
   - [Currency Conversion](#currency-conversion)
   - [Exchange Rates Over Time](#exchange-rates-over-time)
   - [Currency Change Parameters](#currency-change-parameters)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Components](#components)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Sections
 
