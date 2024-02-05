@@ -1,8 +1,46 @@
-# React + Vite
+# Currency Exchange App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Currency Exchange App that provides users with information related to supported currencies, real-time and historical exchange rates, currency conversion, exchange rates over time, and currency change parameters.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Sections](#sections)
+  - [Supported Currencies](#supported-currencies)
+  - [Real-Time Exchange Rates](#real-time-exchange-rates)
+  - [Historical Rates](#historical-rates)
+  - [Currency Conversion](#currency-conversion)
+  - [Exchange Rates Over Time](#exchange-rates-over-time)
+  - [Currency Change Parameters](#currency-change-parameters)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Sections
+
+### Supported Currencies
+
+Display a list of all supported currencies.
+
+### Real-Time Exchange Rates
+
+Show real-time exchange rates for a specific base currency.
+
+### Historical Rates
+
+Display historical exchange rates for a specific day.
+
+### Currency Conversion
+
+Convert one currency to another based on real-time or historic rates.
+
+### Exchange Rates Over Time
+
+Show exchange rates for a specific period of time.
+
+### Currency Change Parameters
+
+Display any currency change parameters (margin, percentage).
