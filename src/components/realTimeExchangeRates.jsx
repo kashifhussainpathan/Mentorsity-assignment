@@ -6,9 +6,7 @@ import SelectCurrency from "./selectCurrency";
 import SymbolsDetails from "./symbolsDetails";
 
 const RealTimeExchangeRates = () => {
-  const [exchangeRates, setExchangeRates] = useState(
-    JSON.parse(localStorage.getItem("realTimeExchange"))
-  );
+  const [exchangeRates, setExchangeRates] = useState({});
   const [baseCurrency, setBaseCurrency] = useState("USD");
 
   useEffect(() => {
@@ -19,10 +17,7 @@ const RealTimeExchangeRates = () => {
         const response = await axios.get(
           `https://api.forexrateapi.com/v1/latest?api_key=${API_KEY}&base=${baseCurrency}`
         );
-        localStorage.setItem(
-          "realTimeExchange",
-          JSON.stringify(response.data.rates)
-        );
+
         setExchangeRates(response.data.rates);
       } catch (error) {
         console.error("Error fetching exchange rates:", error);

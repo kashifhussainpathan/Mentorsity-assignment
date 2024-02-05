@@ -10,7 +10,9 @@ const CurrencyList = () => {
         const response = await axios.get(
           "https://api.forexrateapi.com/v1/symbols"
         );
-        setSymbols(response.data.symbols);
+        if (response.data.success) {
+          setSymbols(response.data.symbols);
+        }
       } catch (error) {
         console.error("Error fetching symbols:", error);
       }

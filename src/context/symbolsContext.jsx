@@ -13,9 +13,7 @@ export const useSymbols = () => {
 };
 
 export const SymbolsProvider = ({ children }) => {
-  const [symbols, setSymbols] = useState(
-    JSON.parse(localStorage.getItem("symbols"))
-  );
+  const [symbols, setSymbols] = useState({});
 
   const handleSetSymbols = (symbols) => {
     setSymbols(symbols);
