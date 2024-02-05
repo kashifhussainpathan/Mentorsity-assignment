@@ -33,7 +33,15 @@ const Symbols = () => {
     <>
       <Heading>SUPPORTED CURRENCIES </Heading>
       <Wrapper>
-        <SymbolsDetails h1="Currency Code" h2="Currency Name" data={symbols} />
+        {Object.entries(symbols).length > 0 ? (
+          <SymbolsDetails
+            h1="Currency Code"
+            h2="Currency Name"
+            data={symbols}
+          />
+        ) : (
+          <p className="text-center">No Currencies found!</p>
+        )}
       </Wrapper>
     </>
   );

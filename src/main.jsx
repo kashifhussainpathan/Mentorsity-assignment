@@ -6,9 +6,7 @@ import "./index.css";
 import { SymbolsProvider } from "./context/symbolsContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <SymbolsProvider>
-      <App />
-    </SymbolsProvider>
-  </React.StrictMode>
+  <SymbolsProvider>
+    <App />
+  </SymbolsProvider>
 );

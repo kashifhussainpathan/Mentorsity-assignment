@@ -46,12 +46,18 @@ const RealTimeExchangeRates = () => {
         />
 
         {/* Live Rates */}
-        <SymbolsDetails
-          h1={"Currency Name"}
-          h2={"Currency Rate"}
-          data={exchangeRates}
-          className={"mt-6"}
-        />
+        {Object.entries(exchangeRates).length > 0 ? (
+          <SymbolsDetails
+            h1={"Currency Name"}
+            h2={"Currency Rate"}
+            data={exchangeRates}
+            className={"mt-6"}
+          />
+        ) : (
+          <p className="text-center mt-4">
+            {`No real time exchange rates found for ${baseCurrency}`}{" "}
+          </p>
+        )}
       </Wrapper>
     </div>
   );
