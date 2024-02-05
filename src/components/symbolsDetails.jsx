@@ -9,7 +9,7 @@ const SymbolsDetails = ({ h1, h2, data, className }) => {
         <div>{h1}</div>
         <div>{h2}</div>
       </div>
-      {Object.entries(data).map(([data1, data2]) => (
+      {Object.entries(data)?.map(([data1, data2]) => (
         <div
           className="grid grid-cols-2 border border-gray-700 py-2 px-10  gap-[300px]"
           key={data1}

@@ -17,8 +17,11 @@ const RealTimeExchangeRates = () => {
         const response = await axios.get(
           `https://api.forexrateapi.com/v1/latest?api_key=${API_KEY}&base=${baseCurrency}`
         );
-
-        setExchangeRates(response.data.rates);
+        if (response.data.success) {
+          setExchangeRates(response.data.rates);
+        } else {
+          setExchangeRates({});
+        }
       } catch (error) {
         console.error("Error fetching exchange rates:", error);
       }

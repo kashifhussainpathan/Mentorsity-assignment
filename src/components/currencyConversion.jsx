@@ -20,6 +20,8 @@ const CurrencyConversion = () => {
         );
         if (response.data.success) {
           setConvertedAmount(response.data.result);
+        } else {
+          setConvertedAmount(null);
         }
       } catch (error) {
         console.error("Error converting currency:", error);

@@ -18,6 +18,8 @@ const Symbols = () => {
         );
         if (response.data.success) {
           handleSetSymbols(response.data.symbols);
+        } else {
+          handleSetSymbols({});
         }
       } catch (error) {
         console.error("Error fetching symbols:", error);
