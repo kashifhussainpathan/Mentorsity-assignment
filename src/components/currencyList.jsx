@@ -9,7 +9,7 @@ const CurrencyList = () => {
       const API_KEY = import.meta.env.VITE_API_KEY;
       try {
         const response = await axios.get(
-          "https://api.forexrateapi.com/v1/symbols?api_key=${API_KEY}"
+          `https://api.forexrateapi.com/v1/symbols?api_key=${API_KEY}`
         );
         if (response.data.success) {
           setSymbols(response.data.symbols);
