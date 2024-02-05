@@ -6,9 +6,10 @@ const CurrencyList = () => {
 
   useEffect(() => {
     const fetchSymbols = async () => {
+      const API_KEY = import.meta.env.VITE_API_KEY;
       try {
         const response = await axios.get(
-          "https://api.forexrateapi.com/v1/symbols"
+          "https://api.forexrateapi.com/v1/symbols?api_key=${API_KEY}"
         );
         if (response.data.success) {
           setSymbols(response.data.symbols);
